@@ -10,22 +10,21 @@
         </style>
     </head>
     <body>
-        <div id = "hero">  
-
-        </div>
+        <div id = "hero">  </div>
 
         <script>
             var hero = new object();
-            hero.element = "hero";
+            hero.element = 'hero';
             hero.x = 250;
             hero.y =450;
 
             function setPosition(sprite){
                 var e  = document.getElementById(sprite.element);
-                e.style.left = sprite.x + "px";
-                e.style.top = sprite.y + "px";
+                e.style.left = sprite.x + 'px';
+                e.style.top = sprite.y + 'px';
 
             }
+
             setPosition(hero);
         </script>
       
