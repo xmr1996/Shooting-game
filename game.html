@@ -32,11 +32,11 @@
     }
 
     document.onkeydown =function(evt){
-      toggleKey(evl.keyCode,true);
+      toggleKey(evt.keyCode,true);
     };
 
     document.onkeyup =function(evt){
-      toggleKey(evl.keyCode,false);
+      toggleKey(evt.keyCode,false);
     };
 
     setPosition(hero);
