@@ -19,12 +19,25 @@
     hero.element = 'hero';
     hero.x = 250;
     hero.y = 460;
+    
+    var controller = new Object();
 
+    function toggleKey(keyCode, isPressed){
+      console.log(keyCode);
+    }
     function setPosition(sprite) {
       var e = document.getElementById(sprite.element);
       e.style.left = sprite.x + 'px';
       e.style.top = sprite.y + 'px';
     }
+
+    document.onkeydown =function(evt){
+      toggleKey(evl.keyCode,true);
+    };
+
+    document.onkeyup =function(evt){
+      toggleKey(evl.keyCode,false);
+    };
 
     setPosition(hero);
 
