@@ -8,11 +8,22 @@
       height: 20px;
       position: absolute;
     }
+    #background{
+      background: black;
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
   </style>
 </head>
 
 <body>
+  <div id = "background"></div>
   <div id="hero"></div>
+  <div id ="laser"> </div>
+  
   <script>
 
     var LEFT_KEY =37;
@@ -26,6 +37,8 @@
     hero.element = 'hero';
     hero.x = 250;
     hero.y = 460;
+    hero.h = 20;
+    hero.w = 20;
     
     var controller = new Object();
 
@@ -49,7 +62,19 @@
         hero.x-=HERO_MOVEMENT;
       if(controller.right)
         hero.x+=HERO_MOVEMENT;
+
+      ensureBounds(hero);
     }
+    
+    function ensureBounds(sprite){
+      if(sprite.x<20) sprite.x=20;
+      if(sprite.y<20) sprite.y=20;
+      if(sprite.x+sprite.w>480)
+        sprite.x = 480-sprite.w;
+      if(sprite.y+sprite.h>480)
+        sprite.y = 480-sprite.h;
+    }
+
     function setPosition(sprite) {
       var e = document.getElementById(sprite.element);
       e.style.left = sprite.x + 'px';
