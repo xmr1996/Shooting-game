@@ -37,15 +37,20 @@
     var RIGHT_KEY =39;
     var DOWN_KEY =40;
     var HERO_MOVEMENT =1;
+    var SPACE_KEY = 32;
     var lastLoopRun =0;
-
-    var hero = new Object();
-    hero.element = 'hero';
-    hero.x = 250;
-    hero.y = 460;
-    hero.h = 20;
-    hero.w = 20;
+ 
     
+    function createSprite(element,x,y,w,h){
+      var result = new Object();
+      result.element = element;
+      result.x = x;
+      result.y = y;
+      result.w = w;
+      result.h = h;
+      return result;
+    }
+
     var controller = new Object();
 
     function toggleKey(keyCode, isPressed){
@@ -57,6 +62,8 @@
         controller.right=isPressed;
       if(keyCode==DOWN_KEY)
         controller.down=isPressed;
+      if(keyCode==SPACE_KEY)
+        controller.space=isPressed;
     }
 
     function handleControl(){
@@ -68,6 +75,11 @@
         hero.x-=HERO_MOVEMENT;
       if(controller.right)
         hero.x+=HERO_MOVEMENT;
+      if(controller.space){
+        laser.x = hero.x +9;
+        laser.y = hero.y - laser.h;
+      }
+        
 
       ensureBounds(hero);
     }
@@ -89,7 +101,8 @@
 
 
     function showSprite(){
-      setPosition(hero)
+      setPosition(hero);
+      setPosition(laser);
     }
     function loop(){
       if(new Date().getTime() - lastLoopRun > 40 ){
@@ -106,6 +119,9 @@
     document.onkeyup =function(evt){
       toggleKey(evt.keyCode,false);
     };
+    
+    var hero = createSprite('hero',250,460,20,20);
+    var laser = createSprite('laser',0,-120,2,50);
 
     loop();
 
