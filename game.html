@@ -57,6 +57,11 @@ function createSprite(element, x, y, w, h) {
   return result;
 }
 
+function intersect(a, b)
+{
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
 function toggleKey(keyCode, isPressed) {
   if (keyCode == LEFT_KEY) {
     controller.left = isPressed;
@@ -151,12 +156,34 @@ function addEnemy() {
 function getRandom(maxSize) {
   return parseInt(Math.random() * maxSize);
 }
-
+function checkCollision(){
+  for(var i = 0; i<enemies.length; i++){
+    if(intersect(laser,enemies[i])){
+      var element = document.getElementById(enemies[i].element);
+      element.style.visibility = 'hidden';
+      element.parentNode.removeChild(element);
+      enemies.splice(i,1);
+      i--;
+    }
+    else if (enemies[i].y+enemies[i].h>=480){
+      var element = document.getElementById(enemies[i].element);
+      element.style.visibility = 'hidden';
+      element.parentNode.removeChild(element);
+      enemies.splice(i,1);
+      i--;
+    }
+    else if(intersect(hero,enemies[i]))
+    {
+      var element = document.getElementById(hero.element);
+      element.style.visibility = 'hidden';
+    }
+  }
+}
 function loop() {
   if (new Date().getTime() - lastLoopRun > 25) {
     updatePositions();
     handleControls();
-    
+    checkCollision();
     addEnemy();
     
     showSprites();
