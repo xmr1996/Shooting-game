@@ -1,1 +1,1 @@
-# Summer
+# A simple javascript shooting game
