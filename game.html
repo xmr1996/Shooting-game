@@ -27,12 +27,29 @@
   height: 35px;
   position: absolute;
 }
+#score{
+  color:black;
+  font-size: 18pt;
+  position:absolute;
+  left: 10px;
+  top: 510px;
+}
+#gameOver{
+  color: red;
+  font-size: 20px;
+  position: absolute;
+  left: 160px;
+  top: 200px;
+  visibility: hidden;
+}
 </style>
 </head>
 <body>
 <div id="background"></div>
 <div id="hero"></div>
 <div id="laser"></div>
+<div id ="score"></div>
+<div id ="gameOver">Game Over</div>
 <script>
 
 var LEFT_KEY = 37;
@@ -42,7 +59,9 @@ var DOWN_KEY = 40;
 var SPACE_KEY = 32;
 var HERO_MOVEMENT = 6;
 
+var score =0;
 var lastLoopRun = 0;
+var run =true;
 
 var controller = new Object();
 var enemies = new Array();
@@ -128,6 +147,8 @@ function showSprites() {
   for (var i = 0; i < enemies.length; i++) {
     setPosition(enemies[i]);
   }
+  var scoreElement =document.getElementById('score');
+  scoreElement.innerHTML = 'SCORE: ' + score;
 }
 
 function updatePositions() {
@@ -139,8 +160,18 @@ function updatePositions() {
   laser.y -= 24;
 }
 
+function difficulty(){
+  if(score<2500)
+    return 50;
+  else if(score>=2500 && score<5000)
+    return 25;
+  else if(score>=5000)
+    return 10;
+}
 function addEnemy() {
-  if (getRandom(50) == 0) {
+  var itreation = difficulty();
+
+  if (getRandom(itreation) == 0) {
     var elementName = 'enemy' + getRandom(10000000);
     var enemy = createSprite(elementName, getRandom(450), -40, 35, 35);
     
@@ -164,6 +195,7 @@ function checkCollision(){
       element.parentNode.removeChild(element);
       enemies.splice(i,1);
       i--;
+      score+=100;
     }
     else if (enemies[i].y+enemies[i].h>=480){
       var element = document.getElementById(enemies[i].element);
@@ -174,11 +206,19 @@ function checkCollision(){
     }
     else if(intersect(hero,enemies[i]))
     {
-      var element = document.getElementById(hero.element);
-      element.style.visibility = 'hidden';
+      gameOver();
     }
   }
 }
+
+function gameOver(){
+  var element = document.getElementById(hero.element);
+  element.style.visibility = 'hidden';
+  element = document.getElementById('gameOver');
+  element.style.visibility ='visible';
+  run =false;
+}
+
 function loop() {
   if (new Date().getTime() - lastLoopRun > 25) {
     updatePositions();
@@ -187,10 +227,12 @@ function loop() {
     addEnemy();
     
     showSprites();
+
     
     lastLoopRun = new Date().getTime();
   }
-  setTimeout('loop();', 2);
+  if(run)
+    setTimeout('loop();', 2);
 }
 
 document.onkeydown = function(evt) {
