@@ -167,16 +167,16 @@ function gameOver(){
 
 function loop() {
   if (new Date().getTime() - lastLoopRun > 25) {
+
     updatePositions();
     handleControls();
     checkCollision();
     addEnemy();
-    
     showSprites();
-
     
     lastLoopRun = new Date().getTime();
   }
+
   if(run)
     setTimeout('loop();', 2);
 }
