@@ -111,8 +111,10 @@ function difficulty(){
     return 50;
   else if(score>=2500 && score<5000)
     return 25;
-  else if(score>=5000)
+  else if(score>=5000 && score<10000)
     return 10;
+  else if (score>=10000)
+    return 5;
 }
 function addEnemy() {
   var itreation = difficulty();
@@ -163,6 +165,11 @@ function gameOver(){
   element = document.getElementById('gameOver');
   element.style.visibility ='visible';
   run =false;
+}
+
+function reloadGame(){
+  run = true;
+  loop();
 }
 
 function loop() {
