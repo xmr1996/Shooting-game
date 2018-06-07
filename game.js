@@ -168,8 +168,7 @@ function gameOver(){
 }
 
 function reloadGame(){
-  run = true;
-  loop();
+  location.reload();
 }
 
 function loop() {
