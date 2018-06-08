@@ -14,8 +14,8 @@
   }
   #laser {
     background: #00ff00;
-    width: 2px;
-    height: 50px;
+    width: 5px;
+    height: 25px;
     position: absolute;
   }
   .enemy {

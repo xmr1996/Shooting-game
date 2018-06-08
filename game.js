@@ -79,9 +79,9 @@ function handleControls() {
   if (controller.right) {
     hero.x += HERO_MOVEMENT;
   }
-  if (controller.space && laser.y <= -120) {
+  if (controller.space && laser.y <= 0) {
     laser.x = hero.x + 9;
-    laser.y = hero.y - laser.h;
+    laser.y = hero.y - (laser.h+4);
   }
   
   ensureBounds(hero);
@@ -144,6 +144,7 @@ function checkCollision(){
       enemies.splice(i,1);
       i--;
       score+=100;
+      laser.x=-10;
     }
     else if (enemies[i].y+enemies[i].h>=480){
       var element = document.getElementById(enemies[i].element);
