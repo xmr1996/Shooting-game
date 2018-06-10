@@ -46,17 +46,17 @@ function toggleKey(keyCode, isPressed) {
 }
 
 function ensureBounds(sprite) {
-  if (sprite.x < 20) {
-    sprite.x = 20;
+  if (sprite.x < 120) {
+    sprite.x = 120;
   }
-  if (sprite.y < 20) {
-    sprite.y = 20;
+  if (sprite.y < 120) {
+    sprite.y = 120;
   }
-  if (sprite.x + sprite.w > 480) {
-    sprite.x = 480 - sprite.w;
+  if (sprite.x + sprite.w > 580) {
+    sprite.x = 580 - sprite.w;
   }
-  if (sprite.y + sprite.h > 480) {
-    sprite.y = 480 - sprite.h;
+  if (sprite.y + sprite.h > 580) {
+    sprite.y = 580 - sprite.h;
   }
 }
 
@@ -104,6 +104,10 @@ function updatePositions() {
     ensureBounds(enemies[i]);
   }
   laser.y -= 24;
+  
+  if(laser.y<=100){
+    laser.x=-10;
+  }
 }
 
 function difficulty(){
@@ -121,7 +125,7 @@ function addEnemy() {
 
   if (getRandom(itreation) == 0) {
     var elementName = 'enemy' + getRandom(10000000);
-    var enemy = createSprite(elementName, getRandom(450), -40, 35, 35);
+    var enemy = createSprite(elementName, getRandom(450)+100, -40, 35, 35);
     
     var element = document.createElement('div');
     element.id = enemy.element;
@@ -146,7 +150,7 @@ function checkCollision(){
       score+=100;
       laser.x=-10;
     }
-    else if (enemies[i].y+enemies[i].h>=480){
+    else if (enemies[i].y+enemies[i].h>=580){
       var element = document.getElementById(enemies[i].element);
       element.style.visibility = 'hidden';
       element.parentNode.removeChild(element);
@@ -170,6 +174,17 @@ function gameOver(){
 
 function reloadGame(){
   location.reload();
+}
+
+
+function pause(){
+  if(!run){
+    run =true;
+    loop();
+  }
+  else{
+    run =false;
+  }
 }
 
 function loop() {
@@ -196,7 +211,7 @@ document.onkeyup = function(evt) {
   toggleKey(evt.keyCode, false);
 };
 
-var hero = createSprite('hero', 250, 460, 20, 20);
+var hero = createSprite('hero', 350, 560, 20, 20);
 var laser = createSprite('laser', 0, -120, 2, 50);
 
 loop();

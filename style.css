@@ -9,8 +9,8 @@
     width: 500px;
     height: 500px;
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 100px;
+    top: 100px;
   }
   #laser {
     background: #00ff00;
@@ -29,21 +29,28 @@
     font-size: 18pt;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     position:absolute;
-    left: 10px;
-    top: 510px;
+    left: 100px;
+    top: 610px;
   }
   #gameOver{
     color: red;
     font-size: 30px;
     position: absolute;
-    left: 180px;
-    top: 200px;
+    left: 280px;
+    top: 300px;
     visibility: hidden;
   }
   #reload{
    
     font-size: 25px;
     position: absolute;
-    left: 10px;
-    top: 540px;
+    left: 100px;
+    top: 640px;
   }
+  #pause{
+   
+    font-size: 25px;
+    position: absolute;
+    left: 250px;
+    top: 640px;
+  }  
