@@ -3,6 +3,8 @@ var UP_KEY = 38;
 var RIGHT_KEY = 39;
 var DOWN_KEY = 40;
 var SPACE_KEY = 32;
+var PAUSE_KEY = 80;
+var RELOAD_KEY = 82;
 var HERO_MOVEMENT = 6;
 
 var score =0;
@@ -42,7 +44,14 @@ function toggleKey(keyCode, isPressed) {
   }
   if (keyCode == SPACE_KEY) {
     controller.space = isPressed;
-  }  
+  }
+  if (keyCode == PAUSE_KEY) {
+    controller.pause = isPressed;
+  }
+  if (keyCode == RELOAD_KEY) {
+    controller.reload = isPressed;
+  }
+  console.log(keyCode);  
 }
 
 function ensureBounds(sprite) {
@@ -82,6 +91,12 @@ function handleControls() {
   if (controller.space && laser.y <= 0) {
     laser.x = hero.x + 9;
     laser.y = hero.y - (laser.h+4);
+  }
+  if(controller.pause){
+    pause();
+  }
+  if(controller.reload){
+    reloadGame();
   }
   
   ensureBounds(hero);
