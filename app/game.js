@@ -92,12 +92,12 @@ function handleControls() {
     laser.x = hero.x + 9;
     laser.y = hero.y - (laser.h+4);
   }
-  if(controller.pause){
-    pause();
-  }
-  if(controller.reload){
-    reloadGame();
-  }
+  // if(controller.pause){
+  //   pause();
+  // }
+  // if(controller.reload){
+  //   reloadGame();
+  // }
   
   ensureBounds(hero);
 }
@@ -199,10 +199,12 @@ function pause(){
   }
   else{
     run =false;
+    
   }
 }
 
 function loop() {
+
   if (new Date().getTime() - lastLoopRun > 25) {
 
     updatePositions();
@@ -214,8 +216,9 @@ function loop() {
     lastLoopRun = new Date().getTime();
   }
 
-  if(run)
+  if(run){
     setTimeout('loop();', 2);
+  }
 }
 
 document.onkeydown = function(evt) {
