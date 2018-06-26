@@ -92,12 +92,7 @@ function handleControls() {
     laser.x = hero.x + 9;
     laser.y = hero.y - (laser.h+4);
   }
-  // if(controller.pause){
-  //   pause();
-  // }
-  // if(controller.reload){
-  //   reloadGame();
-  // }
+
   
   ensureBounds(hero);
 }
