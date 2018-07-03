@@ -50,8 +50,7 @@ function toggleKey(keyCode, isPressed) {
   }
   if (keyCode == RELOAD_KEY) {
     controller.reload = isPressed;
-  }
-  console.log(keyCode);  
+  }  
 }
 
 function ensureBounds(sprite) {
